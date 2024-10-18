@@ -9,12 +9,11 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get('/test', async (req, res) => {
-   const email = 'test@example.com';
-   const uid = 'testuid123';
+app.post('/users', async (req, res) => {
+    const { id, dataObject } = req.body;
 
     try {
-        const path = await saveData(`users/${uid}`, { email, uid });
+        const path = await saveData(`users/${id}`, dataObject);
         res.status(200).send({ message: 'Data saved successfully', path: path });
     } catch (error) {
         console.error('Error saving data:', error);
